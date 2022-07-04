@@ -1,0 +1,11 @@
+{% include '_header.html.twig' %}
+
+<h1>Articles de film</h1>
+<section>
+    <div  id="articles">
+        {% for article in articles %}
+            {% include '_article.html.twig' %}
+        {% endfor %}
+    </div>
+</section>
+{% include '_footer.html.twig' %}

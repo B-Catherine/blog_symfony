@@ -1,0 +1,12 @@
+<div id="article">
+    <article>
+        {% if article.isPublished %}
+            <img src="{{ article.image }}" height="150px">
+            <a href="{{ path ('article', {'id': article.id}) }}"><h2> {{ article.title }} </h2></a>
+            <p> {{ article.description }}</p>
+            <cite> publié par {{ article.author }} le {{ article.publishedAt | date("d/m/Y") }}</cite>
+        {% else %}
+            <p>Article non publié</p>
+        {% endif %}
+    </article>
+</div>
