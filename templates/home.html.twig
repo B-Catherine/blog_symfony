@@ -1,21 +1,27 @@
 {% extends 'base.html.twig'%}
 
+{% block title %}
+    <title>Bienvenue sur notre blog</title>
+{% endblock %}
+
 {% block main %}
+    <h1>Bienvenue</h1>
+    <section>
+        <form action="{{ path('home') }}" method="get">
+            <label for="age">Quel est votre age ?</label>
+            <input type="text" name="age">
+            <button>Valider</button>
+        </form>
+    </section>
+    <section>
+        <div  id="articles">
+            {% for article in articles | filter(article => article.isPublished) | slice(0,3) %}
+                {% include '_article.html.twig' %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
 
-<h1>Bienvenue sur ce site</h1>
-<section>
-    <form action="{{ path('home') }}" method="get">
-        <label for="age">Quel est votre age ?</label>
-        <input type="text" name="age">
-        <button>Valider</button>
-    </form>
-</section>
-<section>
-    <div  id="articles">
-        {% for article in articles | filter(article => article.isPublished) | slice(0,3) %}
-            {% include '_article.html.twig' %}
-        {% endfor %}
-    </div>
-</section>
-
+{% block footer %}
+    <p>Bienvenue sur notre blog</p>
 {% endblock %}

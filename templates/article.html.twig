@@ -1,10 +1,16 @@
 {% extends 'base.html.twig'%}
 
+{% block title %}
+    <title>{{ article.title }}</title>
+{% endblock %}
+
 {% block main %}
+    <h1>Votre article</h1>
+    <section>
+        {% include '_article.html.twig' %}
+    </section>
+{% endblock %}
 
-<h1>Votre article</h1>
-<section>
-    {% include '_article.html.twig' %}
-</section>
-
+{% block footer %}
+    <p>{{ article.title }}</p>
 {% endblock %}

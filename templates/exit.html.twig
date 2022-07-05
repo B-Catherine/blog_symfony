@@ -1,9 +1,15 @@
 {% extends 'base.html.twig'%}
 
-{% block main %}
-<h1>Bye Bye !!!</h1>
-<section>
-    <p>Désolé, vous n'avez pas l'age pour naviguer sur ce site !</p>
-</section>
+{% block title %}
+    <title>Bye Bye !!!</title>
+{% endblock %}
 
+{% block main %}
+    <h1>Bye Bye !!!</h1>
+    <section>
+        <p>Désolé, vous n'avez pas l'age pour naviguer sur ce site !</p>
+    </section>
+{% endblock %}
+{% block footer %}
+    <p>Bye Bye !!!</p>
 {% endblock %}

@@ -7,7 +7,9 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css" />
     {% endblock %}
-    <title>Articles du jour</title>
+    {% block title %}
+        <title>Articles du jour</title>
+    {% endblock %}
 </head>
 <body>
 <header>
@@ -30,7 +32,8 @@
     {% endblock %}
 </main>
 <footer>
-
+    {% block footer %}
+    {% endblock %}
 </footer>
 
 </body>
