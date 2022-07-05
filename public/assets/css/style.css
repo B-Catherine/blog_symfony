@@ -54,6 +54,7 @@ div#articles {
 
 div#article {
     width: 48vw;
+    min-width: 700px;
     padding: 0 5vw;
     margin-bottom: 2em;
 }
