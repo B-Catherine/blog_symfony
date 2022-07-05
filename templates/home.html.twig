@@ -1,10 +1,13 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig'%}
+
+{% block main %}
 
 <h1>Bienvenue sur ce site</h1>
 <section>
     <form action="{{ path('home') }}" method="get">
         <label for="age">Quel est votre age ?</label>
         <input type="text" name="age">
+        <button>Valider</button>
     </form>
 </section>
 <section>
@@ -14,4 +17,5 @@
         {% endfor %}
     </div>
 </section>
-{% include '_footer.html.twig' %}
+
+{% endblock %}

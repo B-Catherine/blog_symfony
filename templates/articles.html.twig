@@ -1,4 +1,6 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig'%}
+
+{% block main %}
 
 <h1>Articles de film</h1>
 <section>
@@ -8,4 +10,5 @@
         {% endfor %}
     </div>
 </section>
-{% include '_footer.html.twig' %}
+
+{% endblock %}

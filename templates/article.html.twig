@@ -1,7 +1,10 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig'%}
+
+{% block main %}
 
 <h1>Votre article</h1>
 <section>
     {% include '_article.html.twig' %}
 </section>
-{% include '_footer.html.twig' %}
+
+{% endblock %}
