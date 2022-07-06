@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -158,5 +161,19 @@ class PagesController extends AbstractController
                             );
 
     }
+    #[Route('/insert', name: "insert")]
 
+    public function insert(Request $request, EntityManagerInterface $entityManager){
+        if ($request->query->has('title')) {
+            $title = $request->query->get('title');
+            $isPublished = $request->query->get('isPublished');
+            $author = $request->query->get('author');
+            $content = $request->query->get('content');
+            $article = new Article($title, $isPublished, $author, $content, $entityManager);
+            return new Response('article ajouté avec ->.<br>pour titre : '.$title.'<br>a publié ? '.$isPublished.'<br>pour auteur : '.$author.'<br>pour contenu : '.$content);
+        }
+        else {
+            return $this->render("insert.html.twig");
+        }
+    }
 }
