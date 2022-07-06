@@ -21,4 +21,18 @@ class Article
      */
     public $title;
 
+    /**
+     *@ORM\Column(type="string")
+     */
+    public $image;
+
+    /**
+     *@ORM\Column(type="boolean")
+     */
+    public $isPublished;
+
+    /**
+     *@ORM\Column(type="string")
+     */
+    public $author;
 }
