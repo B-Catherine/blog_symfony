@@ -62,4 +62,8 @@ div#article {
 footer {
     background-color: blue;
     height: 50px;
+    width: 100vw;
+    color: white;
+    position: fixed;
+    bottom: 0;
 }
