@@ -161,7 +161,7 @@ class PagesController extends AbstractController
                             );
 
     }
-    #[Route('/insert', name: "insert")]
+    #[Route('/insertArticle', name: "insertArticle")]
 
     public function insert(Request $request, EntityManagerInterface $entityManager){
         if ($request->query->has('title')) {
@@ -169,11 +169,13 @@ class PagesController extends AbstractController
             $isPublished = $request->query->get('isPublished');
             $author = $request->query->get('author');
             $content = $request->query->get('content');
-            $article = new Article($title, $isPublished, $author, $content, $entityManager);
+            $article = new Article($title, $isPublished, $author, $content);
+            $entityManager->persist($article);
+            $entityManager->flush($article);
             return new Response('article ajouté avec ->.<br>pour titre : '.$title.'<br>a publié ? '.$isPublished.'<br>pour auteur : '.$author.'<br>pour contenu : '.$content);
         }
         else {
-            return $this->render("insert.html.twig");
+            return $this->render("insertArticle.html.twig");
         }
     }
 }

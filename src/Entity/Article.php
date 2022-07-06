@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,8 +17,6 @@ class Article
         $this->setIsPublished($isPublished);
         $this->setAuthor($author);
         $this->setContent($content);
-        $entityManager->persist($this);
-        $entityManager->flush($this);
     }
 
     /**

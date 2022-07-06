@@ -10,6 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Category
 {
+
+    public function __construct($title, $color, $description, $isPublished)
+    {
+        $this->setTitle($title);
+        $this->setColor($color);
+        $this->setDescription($description);
+        $this->setIsPublished($isPublished);
+    }
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
