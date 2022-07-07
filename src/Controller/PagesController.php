@@ -17,8 +17,10 @@ class PagesController extends AbstractController
     public function home(Request $request, ArticleRepository $repository){
 
         return $this->render("home.html.twig", [
-                'articles' => $repository->findAll()
-            ]
+                'articles' => $repository->findBy([], [
+                                                        'id' => 'DESC'
+                                                      ], 3)
+                ]
         );
     }
 
@@ -55,7 +57,7 @@ class PagesController extends AbstractController
             $article = new Article($title, $isPublished, $author, $content, $image);
             $entityManager->persist($article);
             $entityManager->flush($article);
-            return new Response('article ajouté avec ->.<br>pour titre : '.$title.'<br>a publié ? '.$isPublished.'<br>pour auteur : '.$author.'<br>pour contenu : '.$content.'<br>pour image : '.$image);
+            return new Response('article ajouté avec ->.<br>pour titre : '.$title.'<br>a publié ? '.$isPublished.'<br>pour auteur : '.$author.'<br>pour contenu : '.$content.'<br>pour image : <img src="'.$image.'">');
         }
         else {
             return $this->render("insertArticle.html.twig");
