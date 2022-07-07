@@ -1,0 +1,16 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}
+    <title>{{ category.title }}</title>
+{% endblock %}
+
+{% block main %}
+    <h1>Votre catégorie</h1>
+    <section>
+        {% include '_category.html.twig' %}
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <p>{{ category.title }}</p>
+{% endblock %}
