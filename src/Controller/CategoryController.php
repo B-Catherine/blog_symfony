@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,4 +52,18 @@ class CategoryController extends AbstractController
             return $this->render("insertCategory.html.twig");
         }
     }
+
+    #[Route('/deleteCategory/{id}', name: 'deleteCategory')]
+
+    public function deleteArticle($id, CategoryRepository $repository, EntityManagerInterface $entityManager) {
+        $category = $repository->find($id);
+        if (!is_null($article)) {
+            $entityManager->remove($category);
+            $entityManager->flush();
+            return new Response('catégorie supprimée');
+        } else {
+            return new Response('la catégorie n\'existe pas');
+        }
+    }
+
 }

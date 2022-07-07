@@ -63,4 +63,17 @@ class PagesController extends AbstractController
             return $this->render("insertArticle.html.twig");
         }
     }
+
+    #[Route('/deleteArticle/{id}', name: 'deleteArticle')]
+
+    public function deleteArticle($id, ArticleRepository $repository, EntityManagerInterface $entityManager) {
+        $article = $repository->find($id);
+        if (!is_null($article)) {
+            $entityManager->remove($article);
+            $entityManager->flush();
+            return new Response('article supprimé');
+        } else {
+            return new Response('l\'article n\'existe pas');
+        }
+    }
 }
