@@ -11,12 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Article
 {
 
-    public function __construct($title, $isPublished, $author, $content, $entityManager)
+    public function __construct($title, $isPublished, $author, $content, $image)
     {
         $this->setTitle($title);
         $this->setIsPublished($isPublished);
         $this->setAuthor($author);
         $this->setContent($content);
+        $this->setImage($image);
     }
 
     /**
@@ -45,6 +46,11 @@ class Article
      * @ORM\Column(type="text")
      */
     private $content;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
 
     public function getId(): ?int
     {
@@ -95,6 +101,18 @@ class Article
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
