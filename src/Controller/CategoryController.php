@@ -13,6 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends AbstractController
 {
+    #[Route('categories', name:"categories")]
+
+    public function categories(CategoryRepository $repository){
+
+        return $this->render("categories.html.twig", [
+                'categories' => $repository->findAll()
+            ]
+        );
+
+    }
+
     #[Route('category/{id}', name:"category")]
 
     public function category($id, CategoryRepository $repository){

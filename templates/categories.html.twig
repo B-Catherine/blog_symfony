@@ -1,0 +1,16 @@
+{% extends 'base.html.twig'%}
+
+
+{% block main %}
+    <h1>Les catégories</h1>
+    <section>
+        <div  id="articles">
+            {% for category in categories %}
+                {% include '_category.html.twig' %}
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+{% block footer %}
+    <p>Les catégories</p>
+{% endblock %}
