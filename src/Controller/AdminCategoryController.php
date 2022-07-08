@@ -10,24 +10,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class CategoryController extends AbstractController
+class AdminCategoryController extends AbstractController
 {
-    #[Route('categories', name:"categories")]
+    #[Route('admin/categories', name:"adminCategories")]
 
     public function categories(CategoryRepository $repository){
 
-        return $this->render("categories.html.twig", [
+        return $this->render("admin/categories.html.twig", [
                 'categories' => $repository->findAll()
             ]
         );
 
     }
 
-    #[Route('category/{id}', name:"category")]
+    #[Route('admin/category/{id}', name:"adminCategory")]
 
     public function category($id, CategoryRepository $repository){
 
-        return $this->render("category.html.twig", [
+        return $this->render("admin/category.html.twig", [
                 'category' => $repository->find($id)
             ]
         );
@@ -35,7 +35,7 @@ class CategoryController extends AbstractController
     }
 
 
-    #[Route('/insertCategory', name: "insertCategory")]
+    #[Route('/admin/insertCategory', name: "adminInsertCategory")]
 
     public function insert(Request $request, EntityManagerInterface $entityManager){
         if ($request->query->has('title')) {
@@ -49,11 +49,11 @@ class CategoryController extends AbstractController
             return new Response('catégorie ajoutée avec ->.<br>pour nom : '.$title.'<br>pour couleur : '.$color.'<br>pour description : '.$description.'<br>à publier ? '.$isPublished);
         }
         else {
-            return $this->render("insertCategory.html.twig");
+            return $this->render("admin/insertCategory.html.twig");
         }
     }
 
-    #[Route('/deleteCategory/{id}', name: 'deleteCategory')]
+    #[Route('/admin/deleteCategory/{id}', name: 'adminDeleteCategory')]
 
     public function deleteArticle($id, CategoryRepository $repository, EntityManagerInterface $entityManager) {
         $category = $repository->find($id);
@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
         }
     }
 
-    #[Route('/updateTitleCategory/{id}', name: 'updateTitleCategory')]
+    #[Route('/admin/updateTitleCategory/{id}', name: 'adminUpdateTitleCategory')]
 
     public function updateTitleCategory($id, CategoryRepository $repository, EntityManagerInterface $entityManager)
     {

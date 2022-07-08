@@ -2,7 +2,7 @@
     <article>
         {% if category.isPublished %}
             {# <img src="{{ article.image }}" height="150px"> #}
-            <a href="{{ path ('category', {'id': category.id}) }}"><h2 style="color:{{ category.color }}"> {{ category.title }} </h2></a>
+            <a href="{{ path ('adminCategory', {'id': category.id}) }}"><h2 style="color:{{ category.color }}"> {{ category.title }} </h2></a>
             <p> {{ category.description }}</p>
         {% else %}
             <p>Catégorie non publiée</p>

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class PagesController extends AbstractController
+class AdminArticleController extends AbstractController
 {
     #[Route('/', name: "home")]
 
@@ -28,7 +28,7 @@ class PagesController extends AbstractController
 
     public function articles(ArticleRepository $repository){
 
-        return $this->render("articles.html.twig", [
+        return $this->render("admin/articles.html.twig", [
                 'articles' => $repository->findAll()
             ]
         );
@@ -39,13 +39,13 @@ class PagesController extends AbstractController
 
     public function article($id, ArticleRepository $repository){
 
-        return $this->render("article.html.twig", [
+        return $this->render("admin/article.html.twig", [
                                                             'article' => $repository->find($id)
                                                         ]
                             );
 
     }
-    #[Route('/admin/insertArticle', name: "AdminInsertArticle")]
+    #[Route('/admin/insertArticle', name: "adminInsertArticle")]
 
     public function insert(Request $request, EntityManagerInterface $entityManager){
         if ($request->query->has('title')) {
@@ -60,7 +60,7 @@ class PagesController extends AbstractController
             return new Response('article ajouté avec ->.<br>pour titre : '.$title.'<br>a publié ? '.$isPublished.'<br>pour auteur : '.$author.'<br>pour contenu : '.$content.'<br>pour image : <img src="'.$image.'">');
         }
         else {
-            return $this->render("insertArticle.html.twig");
+            return $this->render("admin/insertArticle.html.twig");
         }
     }
 
