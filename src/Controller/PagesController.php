@@ -76,4 +76,14 @@ class PagesController extends AbstractController
             return new Response('l\'article n\'existe pas');
         }
     }
+
+    #[Route('/updateTitleArticle/{id}', name: 'updateTitleArticle')]
+
+    public function updateTitleArticle($id, ArticleRepository $repository, EntityManagerInterface $entityManager) {
+        $article = $repository->find($id);
+        $article->setTitle("Une hirondelle a fait le printemps");
+        $entityManager->persist($article);
+        $entityManager->flush();
+        return new Response('titre modifié en : '.$article->getTitle());
+    }
 }

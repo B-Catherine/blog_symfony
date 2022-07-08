@@ -57,7 +57,7 @@ class CategoryController extends AbstractController
 
     public function deleteArticle($id, CategoryRepository $repository, EntityManagerInterface $entityManager) {
         $category = $repository->find($id);
-        if (!is_null($article)) {
+        if (!is_null($category)) {
             $entityManager->remove($category);
             $entityManager->flush();
             return new Response('catégorie supprimée');
@@ -66,4 +66,14 @@ class CategoryController extends AbstractController
         }
     }
 
+    #[Route('/updateTitleCategory/{id}', name: 'updateTitleCategory')]
+
+    public function updateTitleCategory($id, CategoryRepository $repository, EntityManagerInterface $entityManager)
+    {
+        $category = $repository->find($id);
+        $category->setTitle("Les mammifères");
+        $entityManager->persist($category);
+        $entityManager->flush();
+        return new Response('titre modifié en : ' . $category->getTitle());
+    }
 }
