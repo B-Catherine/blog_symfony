@@ -24,7 +24,7 @@ class PagesController extends AbstractController
         );
     }
 
-    #[Route('articles', name:"articles")]
+    #[Route('/admin/articles', name:"adminArticles")]
 
     public function articles(ArticleRepository $repository){
 
@@ -35,7 +35,7 @@ class PagesController extends AbstractController
 
     }
 
-    #[Route('article/{id}', name:"article")]
+    #[Route('admin/article/{id}', name:"adminArticle")]
 
     public function article($id, ArticleRepository $repository){
 
@@ -45,7 +45,7 @@ class PagesController extends AbstractController
                             );
 
     }
-    #[Route('/insertArticle', name: "insertArticle")]
+    #[Route('/admin/insertArticle', name: "AdminInsertArticle")]
 
     public function insert(Request $request, EntityManagerInterface $entityManager){
         if ($request->query->has('title')) {
@@ -64,7 +64,7 @@ class PagesController extends AbstractController
         }
     }
 
-    #[Route('/deleteArticle/{id}', name: 'deleteArticle')]
+    #[Route('/admin/deleteArticle/{id}', name: 'adminDeleteArticle')]
 
     public function deleteArticle($id, ArticleRepository $repository, EntityManagerInterface $entityManager) {
         $article = $repository->find($id);
@@ -77,7 +77,7 @@ class PagesController extends AbstractController
         }
     }
 
-    #[Route('/updateTitleArticle/{id}', name: 'updateTitleArticle')]
+    #[Route('/admin/updateTitleArticle/{id}', name: 'adminUpdateTitleArticle')]
 
     public function updateTitleArticle($id, ArticleRepository $repository, EntityManagerInterface $entityManager) {
         $article = $repository->find($id);
