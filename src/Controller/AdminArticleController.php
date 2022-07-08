@@ -71,7 +71,7 @@ class AdminArticleController extends AbstractController
         if (!is_null($article)) {
             $entityManager->remove($article);
             $entityManager->flush();
-            return new Response('article supprimé');
+            return $this->redirectToRoute('adminArticles');
         } else {
             return new Response('l\'article n\'existe pas');
         }

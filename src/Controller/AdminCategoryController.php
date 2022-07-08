@@ -60,7 +60,7 @@ class AdminCategoryController extends AbstractController
         if (!is_null($category)) {
             $entityManager->remove($category);
             $entityManager->flush();
-            return new Response('catégorie supprimée');
+            return $this->redirectToRoute('adminCategories');
         } else {
             return new Response('la catégorie n\'existe pas');
         }

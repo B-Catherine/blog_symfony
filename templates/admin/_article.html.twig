@@ -5,6 +5,7 @@
             <a href="{{ path ('adminArticle', {'id': article.id}) }}"><h2> {{ article.title }} </h2></a>
             <p> {{ article.content }}</p>
             <cite> publié par {{ article.author }} {# le {{ article.publishedAt | date("d/m/Y") }}#}</cite>
+            <a href="{{ path ('adminDeleteArticle', {'id': article.id}) }}">Supprimer article</a>
         {% else %}
             <p>Article non publié</p>
         {% endif %}
