@@ -17,11 +17,11 @@ class AdminArticleController extends AbstractController
     public function home(Request $request, ArticleRepository $repository){
 
         return $this->render("home.html.twig", [
-                'articles' => $repository->findBy([], [
-                                                        'id' => 'DESC'
-                                                      ], 3)
-                ]
-        );
+                                            'articles' => $repository->findBy([], [
+                                                                                    'id' => 'DESC'
+                                                                                  ], 3)
+                                          ]
+                            );
     }
 
     #[Route('/admin/articles', name:"adminArticles")]
@@ -29,9 +29,9 @@ class AdminArticleController extends AbstractController
     public function articles(ArticleRepository $repository){
 
         return $this->render("admin/articles.html.twig", [
-                'articles' => $repository->findAll()
-            ]
-        );
+                                                                'articles' => $repository->findAll()
+                                                              ]
+                            );
 
     }
 
@@ -40,11 +40,12 @@ class AdminArticleController extends AbstractController
     public function article($id, ArticleRepository $repository){
 
         return $this->render("admin/article.html.twig", [
-                                                            'article' => $repository->find($id)
-                                                        ]
+                                                                'article' => $repository->find($id)
+                                                             ]
                             );
 
     }
+
     #[Route('/admin/insertArticle', name: "adminInsertArticle")]
 
     public function insert(Request $request, EntityManagerInterface $entityManager){
@@ -57,7 +58,8 @@ class AdminArticleController extends AbstractController
             $article = new Article($title, $isPublished, $author, $content, $image);
             $entityManager->persist($article);
             $entityManager->flush($article);
-            return new Response('article ajouté avec ->.<br>pour titre : '.$title.'<br>a publié ? '.$isPublished.'<br>pour auteur : '.$author.'<br>pour contenu : '.$content.'<br>pour image : <img src="'.$image.'">');
+            $this->addFlash('success', 'article ajouté avec pour titre : '.$title.', a publié ? '.$isPublished.' pour auteur : '.$author.' pour contenu : '.$content.' pour image : '.$image);;
+            return $this->redirectToRoute('adminArticles');
         }
         else {
             return $this->render("admin/insertArticle.html.twig");
@@ -71,9 +73,11 @@ class AdminArticleController extends AbstractController
         if (!is_null($article)) {
             $entityManager->remove($article);
             $entityManager->flush();
+            $this->addFlash('success', 'article "'.$article->getTitle().'" supprimé');
             return $this->redirectToRoute('adminArticles');
         } else {
-            return new Response('l\'article n\'existe pas');
+            $this->addFlash('error', 'l\'article "'.$article->getTitle().'" n\'existe pas');
+            return $this->redirectToRoute('adminArticles');
         }
     }
 
@@ -84,6 +88,7 @@ class AdminArticleController extends AbstractController
         $article->setTitle("Une hirondelle a fait le printemps");
         $entityManager->persist($article);
         $entityManager->flush();
-        return new Response('titre modifié en : '.$article->getTitle());
+        $this->addFlash('success','titre de l\'article modifié en : '.$article->getTitle().'"');
+        return $this->redirectToRoute('adminArticles');
     }
 }

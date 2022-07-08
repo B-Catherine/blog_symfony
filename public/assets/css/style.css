@@ -59,6 +59,14 @@ div#article {
     margin-bottom: 2em;
 }
 
+p.error {
+    color: red;
+}
+
+p.success {
+    color: green;
+}
+
 footer {
     background-color: blue;
     height: 50px;

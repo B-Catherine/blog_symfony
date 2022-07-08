@@ -28,9 +28,15 @@
         </ul>
     </nav>
 
-
 </header>
 <main>
+    {% for message in app.flashes('error') %}
+        <p class="error">{{ message }}</p>
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+        <p class="success">{{ message }}</p>
+    {% endfor %}
+
     {% block main %}
     {% endblock %}
 </main>

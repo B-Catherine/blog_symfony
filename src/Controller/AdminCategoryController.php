@@ -17,9 +17,9 @@ class AdminCategoryController extends AbstractController
     public function categories(CategoryRepository $repository){
 
         return $this->render("admin/categories.html.twig", [
-                'categories' => $repository->findAll()
-            ]
-        );
+                                                        'categories' => $repository->findAll()
+                                                      ]
+                            );
 
     }
 
@@ -28,9 +28,9 @@ class AdminCategoryController extends AbstractController
     public function category($id, CategoryRepository $repository){
 
         return $this->render("admin/category.html.twig", [
-                'category' => $repository->find($id)
-            ]
-        );
+                                                        'category' => $repository->find($id)
+                                                    ]
+                            );
 
     }
 
@@ -46,7 +46,8 @@ class AdminCategoryController extends AbstractController
             $category = new Category($title, $color, $description, $isPublished);
             $entityManager->persist($category);
             $entityManager->flush($category);
-            return new Response('catégorie ajoutée avec ->.<br>pour nom : '.$title.'<br>pour couleur : '.$color.'<br>pour description : '.$description.'<br>à publier ? '.$isPublished);
+            $this->addFlash('success', 'catégorie ajoutée avec pour nom : '.$title.' pour couleur : '.$color.' pour description : '.$description.' à publier ? '.$isPublished);;
+            return $this->redirectToRoute('adminCategories');
         }
         else {
             return $this->render("admin/insertCategory.html.twig");
@@ -60,9 +61,11 @@ class AdminCategoryController extends AbstractController
         if (!is_null($category)) {
             $entityManager->remove($category);
             $entityManager->flush();
+            $this->addFlash('success', 'catégorie "'.$category->getTitle().'" supprimée');
             return $this->redirectToRoute('adminCategories');
         } else {
-            return new Response('la catégorie n\'existe pas');
+            $this->addFlash('error', 'la catégorie n\'existe pas');
+            return $this->redirectToRoute('adminCategories');
         }
     }
 
@@ -74,6 +77,7 @@ class AdminCategoryController extends AbstractController
         $category->setTitle("Les mammifères");
         $entityManager->persist($category);
         $entityManager->flush();
-        return new Response('titre modifié en : ' . $category->getTitle());
+        $this->addFlash('success', 'titre de la catégorie modifié en : "' . $category->getTitle().'"');
+        return $this->redirectToRoute('adminCategories');
     }
 }
