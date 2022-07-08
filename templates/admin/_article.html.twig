@@ -1,13 +1,17 @@
 <div id="article">
     <article>
-        {% if article.isPublished %}
-            <img src="{{ article.image }}" height="150px">
-            <a href="{{ path ('adminArticle', {'id': article.id}) }}"><h2> {{ article.title }} </h2></a>
-            <p> {{ article.content }}</p>
-            <cite> publié par {{ article.author }} {# le {{ article.publishedAt | date("d/m/Y") }}#}</cite>
-            <a href="{{ path ('adminDeleteArticle', {'id': article.id}) }}">Supprimer article</a>
+        {% if article %}
+            {% if article.isPublished %}
+                <img src="{{ article.image }}" height="150px">
+                <a href="{{ path ('adminArticle', {'id': article.id}) }}"><h2> {{ article.title }} </h2></a>
+                <p> {{ article.content }}</p>
+                <cite> publié par {{ article.author }} {# le {{ article.publishedAt | date("d/m/Y") }}#}</cite>
+                <a href="{{ path ('adminDeleteArticle', {'id': article.id}) }}">Supprimer article</a>
+            {% else %}
+                <p>Article non publié</p>
+            {% endif %}
         {% else %}
-            <p>Article non publié</p>
+            <p>Cet article n'existe pas</p>
         {% endif %}
     </article>
 </div>
