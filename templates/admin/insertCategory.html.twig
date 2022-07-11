@@ -7,17 +7,7 @@
 {% block main %}
     <h1>Ajout d'une catégorie</h1>
     <section>
-        <form action="{{ path('adminInsertCategory') }}" method="get">
-            <label for="title">Nom de la catégorie</label>
-            <input type="text" name="title"><br>
-            <label for="color">Couleur de la catégorie</label>
-            <input type="text" name="color"><br>
-            <label for="description">Description de la catégorie</label>
-            <textarea name="description" rows="10" cols="35"></textarea><br>
-            <label for="isPublished">A publier ?</label>
-            <input type="text" name="isPublished"><br>
-            <button>Ajouter</button><br>
-        </form>
+            {{ form(form) }}
     </section>
 {% endblock %}
 

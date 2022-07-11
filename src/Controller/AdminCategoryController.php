@@ -6,7 +6,6 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,26 +36,17 @@ class AdminCategoryController extends AbstractController
 
     #[Route('/admin/insertCategory', name: "adminInsertCategory")]
 
-    public function insert(Request $request, EntityManagerInterface $entityManager){
-        if ($request->query->has('title')) {
-            $title = $request->query->get('title');
-            $color = $request->query->get('color');
-            $description = $request->query->get('description');
-            $isPublished = $request->query->get('isPublished');
-            $category = new Category($title, $color, $description, $isPublished);
-            $entityManager->persist($category);
-            $entityManager->flush($category);
-            $this->addFlash('success', 'catégorie ajoutée avec pour nom : '.$title.' pour couleur : '.$color.' pour description : '.$description.' à publier ? '.$isPublished);;
-            return $this->redirectToRoute('adminCategories');
-        }
-        else {
-            return $this->render("admin/insertCategory.html.twig");
-        }
+    public function insertCategory(Request $request, EntityManagerInterface $entityManager){
+        $category= new Category();
+        $form=$this->createForm(CategoryType::class, $category);
+        return $this->render("admin/insertCategory.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 
     #[Route('/admin/deleteCategory/{id}', name: 'adminDeleteCategory')]
 
-    public function deleteArticle($id, CategoryRepository $repository, EntityManagerInterface $entityManager) {
+    public function deleteCategory($id, CategoryRepository $repository, EntityManagerInterface $entityManager) {
         $category = $repository->find($id);
         if (!is_null($category)) {
             $entityManager->remove($category);

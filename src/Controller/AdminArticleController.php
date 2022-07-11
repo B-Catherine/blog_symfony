@@ -48,22 +48,12 @@ class AdminArticleController extends AbstractController
 
     #[Route('/admin/insertArticle', name: "adminInsertArticle")]
 
-    public function insert(Request $request, EntityManagerInterface $entityManager){
-        if ($request->query->has('title')) {
-            $title = $request->query->get('title');
-            $isPublished = $request->query->get('isPublished');
-            $author = $request->query->get('author');
-            $content = $request->query->get('content');
-            $image = $request->query->get('image');
-            $article = new Article($title, $isPublished, $author, $content, $image);
-            $entityManager->persist($article);
-            $entityManager->flush($article);
-            $this->addFlash('success', 'article ajouté avec pour titre : '.$title.', a publié ? '.$isPublished.' pour auteur : '.$author.' pour contenu : '.$content.' pour image : '.$image);;
-            return $this->redirectToRoute('adminArticles');
-        }
-        else {
-            return $this->render("admin/insertArticle.html.twig");
-        }
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager){
+        $article= new Article();
+        $form=$this->createForm(ArticleType::class, $article);
+        return $this->render("admin/insertCategory.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 
     #[Route('/admin/deleteArticle/{id}', name: 'adminDeleteArticle')]
