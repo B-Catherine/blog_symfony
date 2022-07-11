@@ -66,15 +66,20 @@ class AdminCategoryController extends AbstractController
         }
     }
 
-    #[Route('/admin/updateTitleCategory/{id}', name: 'adminUpdateTitleCategory')]
+    #[Route('/admin/updateCategory/{id}', name: 'adminUpdateCategory')]
 
-    public function updateTitleCategory($id, CategoryRepository $repository, EntityManagerInterface $entityManager)
+    public function updateCategory($id, Request $request, CategoryRepository $repository, EntityManagerInterface $entityManager)
     {
         $category = $repository->find($id);
-        $category->setTitle("Les mammifères");
-        $entityManager->persist($category);
-        $entityManager->flush();
-        $this->addFlash('success', 'titre de la catégorie modifié en : "' . $category->getTitle().'"');
-        return $this->redirectToRoute('adminCategories');
+        $form=$this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $this->addFlash('success', 'Catégorie mise à jour');
+        }
+        return $this->render("admin/updateCategory.html.twig", [
+            'form' => $form->createView()
+        ]);
     }
 }
