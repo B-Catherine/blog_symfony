@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -51,7 +51,13 @@ class AdminArticleController extends AbstractController
     public function insertArticle(Request $request, EntityManagerInterface $entityManager){
         $article= new Article();
         $form=$this->createForm(ArticleType::class, $article);
-        return $this->render("admin/insertCategory.html.twig", [
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($article);
+            $entityManager->flush();
+            $this->addFlash('success', 'Article ajouté');
+        }
+        return $this->render("admin/insertArticle.html.twig", [
             'form' => $form->createView()
         ]);
     }

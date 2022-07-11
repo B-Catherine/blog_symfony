@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,12 @@ class AdminCategoryController extends AbstractController
     public function insertCategory(Request $request, EntityManagerInterface $entityManager){
         $category= new Category();
         $form=$this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $this->addFlash('success', 'Catégorie ajoutée');
+        }
         return $this->render("admin/insertCategory.html.twig", [
             'form' => $form->createView()
         ]);

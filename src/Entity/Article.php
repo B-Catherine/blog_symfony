@@ -11,15 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Article
 {
 
-    public function __construct($title, $isPublished, $author, $content, $image)
-    {
-        $this->setTitle($title);
-        $this->setIsPublished($isPublished);
-        $this->setAuthor($author);
-        $this->setContent($content);
-        $this->setImage($image);
-    }
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
