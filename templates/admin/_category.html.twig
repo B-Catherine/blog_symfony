@@ -6,6 +6,9 @@
                 <a href="{{ path ('adminCategory', {'id': category.id}) }}"><h2 style="color:{{ category.color }}"> {{ category.title }} </h2></a>
                 <a href="{{ path ('adminDeleteCategory', {'id': category.id}) }}">Supprimer catégorie</a>
                 <p> {{ category.description }}</p>
+                {% for article in category.articles %}
+                    <p> {{ article.title }}</p>
+                {% endfor %}
             {% else %}
                 <p>Catégorie non publiée</p>
             {% endif %}
