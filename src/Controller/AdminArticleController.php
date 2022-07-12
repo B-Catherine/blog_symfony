@@ -17,11 +17,10 @@ class AdminArticleController extends AbstractController
     public function home(Request $request, ArticleRepository $repository){
 
         return $this->render("home.html.twig", [
-                                            'articles' => $repository->findBy([], [
-                                                                                    'id' => 'DESC'
-                                                                                  ], 3)
-                                          ]
-                            );
+            'articles' => $repository->findBy([], [
+                'id' => 'DESC'
+            ], 3)
+        ]);
     }
 
     #[Route('/admin/articles', name:"adminArticles")]
@@ -29,10 +28,8 @@ class AdminArticleController extends AbstractController
     public function articles(ArticleRepository $repository){
 
         return $this->render("admin/articles.html.twig", [
-                                                                'articles' => $repository->findAll()
-                                                              ]
-                            );
-
+            'articles' => $repository->findAll()
+        ]);
     }
 
     #[Route('admin/article/{id}', name:"adminArticle")]
@@ -40,10 +37,8 @@ class AdminArticleController extends AbstractController
     public function article($id, ArticleRepository $repository){
 
         return $this->render("admin/article.html.twig", [
-                                                                'article' => $repository->find($id)
-                                                             ]
-                            );
-
+            'article' => $repository->find($id)
+        ]);
     }
 
     #[Route('/admin/insertArticle', name: "adminInsertArticle")]

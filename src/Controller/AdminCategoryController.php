@@ -17,10 +17,8 @@ class AdminCategoryController extends AbstractController
     public function categories(CategoryRepository $repository){
 
         return $this->render("admin/categories.html.twig", [
-                                                        'categories' => $repository->findAll()
-                                                      ]
-                            );
-
+            'categories' => $repository->findAll()
+        ]);
     }
 
     #[Route('admin/category/{id}', name:"adminCategory")]
@@ -28,10 +26,8 @@ class AdminCategoryController extends AbstractController
     public function category($id, CategoryRepository $repository){
 
         return $this->render("admin/category.html.twig", [
-                                                        'category' => $repository->find($id)
-                                                    ]
-                            );
-
+            'category' => $repository->find($id)
+        ]);
     }
 
 
