@@ -20,7 +20,7 @@ class ArticleType extends AbstractType
             ->add('author')
             ->add('content')
             ->add('image')
-            ->add('Category', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'title'
             ])
