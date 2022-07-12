@@ -59,6 +59,10 @@ div#article {
     margin-bottom: 2em;
 }
 
+form {
+    width: 70vw;
+}
+
 p.error {
     color: red;
 }
