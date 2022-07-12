@@ -2,6 +2,9 @@
     <article>
         {% if article %}
             {% if article.isPublished %}
+                {% if article.category %}
+                    <p> {{ article.category.title }}</p>
+                {% endif %}
                 <img src="{{ article.image }}" height="150px">
                 <a href="{{ path ('adminArticle', {'id': article.id}) }}"><h2> {{ article.title }} </h2></a>
                 <p> {{ article.content }}</p>
