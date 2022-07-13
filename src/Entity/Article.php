@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @UniqueEntity("title")
  */
 class Article
 {
@@ -20,31 +23,60 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Merci de remplir un titre")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre titre doit avoir au minimum {{ limit }} caractères,
+     *      maxMessage = "Votre titre doit avoir au maximum {{ limit }} caractères"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\Type(
+     *     type="boolean",
+     *     message="A publier doit être vrai ou faux."
+     * )
      */
     private $isPublished;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Merci de remplir un auteur")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Votre nom doit avoir au minimum {{ limit }} caractères,
+     *      maxMessage = "Votre nom doit avoir au maximum {{ limit }} caractères"
+     * )
      */
     private $author;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull(message="Merci de mettre un contenu")
+     *
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Merci de remplir une image")
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 255,
+     *      minMessage = "Votre URL doit avoir au minimum {{ limit }} caractères,
+     *      maxMessage = "Votre URL doit avoir au maximum {{ limit }} caractères"
+     * )
+     * @Assert\Url(message="Merci de bien mettre une URL", protocols={"http", "https"})
      */
     private $image;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
+     *
      */
     private $category;
 

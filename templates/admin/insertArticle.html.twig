@@ -8,29 +8,35 @@
     <h1>Ajout d'un article</h1>
     <section>
         {{ form_start(form) }}
-            <div class="form-group"></div>
+            <div class="form-group">
                 {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.title, {'attr': {'class' : 'form-control'}}) }}
+                {{ form_errors(form.title) }}
             </div>
-            <div class="form-check"></div>
+            <div class="form-check">
                 {{ form_label(form.isPublished, 'A publier ?', {'label_attr': {'class': 'form-check-label'}}) }}
                 {{ form_widget(form.isPublished, {'attr': {'class' : 'form-check-control'}}) }}
+                {{ form_errors(form.isPublished) }}
             </div>
-            <div class="form-group"></div>
+            <div class="form-group">
                 {{ form_label(form.author, 'Auteur', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.author, {'attr': {'class' : 'form-control'}}) }}
+                {{ form_errors(form.author) }}
             </div>
-            <div class="form-group"></div>
+            <div class="form-group">
                 {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.content, {'attr': {'class' : 'form-control'}}) }}
+                {{ form_errors(form.content) }}
             </div>
-            <div class="form-group"></div>
+            <div class="form-group">
                 {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.image, {'attr': {'class' : 'form-control'}}) }}
+                {{ form_errors(form.image) }}
             </div>
-            <div class="form-check"></div>
+            <div class="form-check">
                 {{ form_label(form.category, 'Catégorie', {'label_attr': {'class': 'form-check-label'}}) }}
                 {{ form_widget(form.category, {'attr': {'class' : 'form-check-control'}}) }}
+                {{ form_errors(form.category) }}
             </div>
             <br><br>
             {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}

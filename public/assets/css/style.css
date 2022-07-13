@@ -14,7 +14,7 @@ nav {
     position: relative;
 }
 
-ul {
+nav>ul {
     list-style: none;
     position: absolute;
     top: 50%;

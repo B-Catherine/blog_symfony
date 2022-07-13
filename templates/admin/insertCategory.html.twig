@@ -8,21 +8,26 @@
     <h1>Ajout d'une catégorie</h1>
     <section>
         {{ form_start(form) }}
-            <div class="form-group"></div>
+            <div class="form-group">
                 {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.title, {'attr': {'class' : 'form-control'}}) }}
+
             </div>
-            <div class="form-group"></div>
+            {{ form_errors(form.title) }}
+            <div class="form-group">
                 {{ form_label(form.color, 'Couleur', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.color, {'attr': {'class' : 'form-control'}}) }}
+                {{ form_errors(form.color) }}
             </div>
-            <div class="form-group"></div>
+            <div class="form-group">
                 {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(form.description, {'attr': {'class' : 'form-control'}}) }}
+                {{ form_errors(form.description) }}
             </div>
-            <div class="form-check"></div>
+            <div class="form-check">
                 {{ form_label(form.isPublished, 'A publier ?', {'label_attr': {'class': 'form-check-label'}}) }}
                 {{ form_widget(form.isPublished, {'attr': {'class' : 'form-check-control'}}) }}
+                {{ form_errors(form.isPublished) }}
             </div>
             <br><br>
             {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
