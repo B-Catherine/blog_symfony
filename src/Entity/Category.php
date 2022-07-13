@@ -26,7 +26,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull(message="Merci de remplir un titre")
+     * @Assert\NotBlank(message="Merci de remplir un titre")
      * @Assert\Type(
      *     type="string",
      *     message="Votre titre doit être un texte."
@@ -48,14 +48,14 @@ class Category
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotNull(message="Merci de mettre une description")
+     * @Assert\NotBlank(message="Merci de mettre une description")
      * @Assert\Type(
      *     type="string",
      *     message="Votre description doit être un texte."
      * )
      * @Assert\Length(
      *      min = 2,
-     *      max = 255,
+     *      max = 4294967295,
      *      minMessage = "Votre description doit avoir au minimum {{ limit }} caractères,
      *      maxMessage = "Votre description doit avoir au maximum {{ limit }} caractères"
      * )

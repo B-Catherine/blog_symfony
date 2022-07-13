@@ -22,7 +22,8 @@ class ArticleType extends AbstractType
             ->add('image')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'title'
+                'choice_label' => 'title',
+                'placeholder' => 'Choississez votre catégorie'
             ])
             ->add('submit', SubmitType::class)
         ;
