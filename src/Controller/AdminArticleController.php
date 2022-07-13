@@ -87,4 +87,14 @@ class AdminArticleController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/admin/searchArticles', name: 'adminSearchArticles')]
+
+    public function searchArticles(Request $request, ArticleRepository $repository) {
+        $search = $request->query->get('search');
+        $articles = $repository->searchArticlesByTitle($search);
+        return $this->render('admin/searchArticles.html.twig', [
+            'articles' => $articles
+        ]);
+    }
 }

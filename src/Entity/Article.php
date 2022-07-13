@@ -44,7 +44,7 @@ class Article
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      */
     private $category;
 
@@ -113,20 +113,15 @@ class Article
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    /**
-     * @param mixed $category
-     */
-    public function setCategory($category): void
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
-    }
 
+        return $this;
+    }
 }

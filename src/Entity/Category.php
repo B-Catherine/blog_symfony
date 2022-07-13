@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,11 +41,12 @@ class Category
     private $isPublished;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
      */
     private $articles;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->articles = new ArrayCollection();
     }
 
@@ -102,20 +104,32 @@ class Category
     }
 
     /**
-     * @return mixed
+     * @return Collection<int, Article>
      */
-    public function getArticles()
+    public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-    /**
-     * @param mixed $articles
-     */
-    public function setArticles($articles): void
+    public function addArticle(Article $article): self
     {
-        $this->articles = $articles;
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCategory($this);
+        }
+
+        return $this;
     }
 
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getCategory() === $this) {
+                $article->setCategory(null);
+            }
+        }
 
+        return $this;
+    }
 }

@@ -16,6 +16,10 @@
 <header>
 
     <nav>
+        <form method="GET" action="{{ path('adminSearchArticles') }}">
+            <input type="text" name="search">
+            <input type="submit">
+        </form>
         <ul>
             <li>
                 <a href="{{ path('home') }}">Accueil</a>

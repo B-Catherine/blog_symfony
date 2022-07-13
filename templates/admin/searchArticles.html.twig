@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <section>
+        <div  id="articles">
+            {% for article in articles %}
+                {% include 'admin/_article.html.twig' %}
+            {% endfor %}
+        </div>
+        <a href="{{ path('adminInsertArticle') }}">Ajouter un article</a>
+    </section>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
