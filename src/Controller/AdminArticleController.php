@@ -7,8 +7,10 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminArticleController extends AbstractController
 {
@@ -43,11 +45,22 @@ class AdminArticleController extends AbstractController
 
     #[Route('/admin/insertArticle', name: "adminInsertArticle")]
 
-    public function insertArticle(Request $request, EntityManagerInterface $entityManager){
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger){
         $article= new Article();
         $form=$this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                $article->setImage($newFilename);
+            }
             $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success', 'Article ajouté');
@@ -74,17 +87,29 @@ class AdminArticleController extends AbstractController
 
     #[Route('/admin/updateArticle/{id}', name: 'adminUpdateArticle')]
 
-    public function updateArticle($id, Request $request, ArticleRepository $repository, EntityManagerInterface $entityManager) {
+    public function updateArticle($id, Request $request, ArticleRepository $repository, EntityManagerInterface $entityManager, SluggerInterface $slugger) {
         $article = $repository->find($id);
         $form=$this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                $imageFile->move(
+                    $this->getParameter('images_directory'),
+                    $newFilename
+                );
+                $article->setImage($newFilename);
+            }
             $entityManager->persist($article);
             $entityManager->flush();
             $this->addFlash('success', 'Article mis à jour');
         }
         return $this->render("admin/updateArticle.html.twig", [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'article' =>$article
         ]);
     }
 

@@ -26,39 +26,19 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de remplir un titre")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Votre titre doit être un texte."
-     * )
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Votre titre doit avoir au minimum {{ limit }} caractères,
-     *      maxMessage = "Votre titre doit avoir au maximum {{ limit }} caractères"
-     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\CssColor(message="Merci de rentrer une couleur hexadécimale")
+     * @Assert\CssColor(
+     *     formats = Assert\CssColor::HEX_LONG,
+     *     message="Merci de rentrer une couleur hexadécimale")
      */
     private $color;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Merci de mettre une description")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Votre description doit être un texte."
-     * )
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 4294967295,
-     *      minMessage = "Votre description doit avoir au minimum {{ limit }} caractères,
-     *      maxMessage = "Votre description doit avoir au maximum {{ limit }} caractères"
-     * )
      */
     private $description;
 

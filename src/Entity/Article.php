@@ -23,17 +23,6 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de remplir un titre")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Votre titre doit être un texte."
-     * )
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Votre titre doit avoir au minimum {{ limit }} caractères,
-     *      maxMessage = "Votre titre doit avoir au maximum {{ limit }} caractères"
-     * )
      */
     private $title;
 
@@ -48,47 +37,16 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de remplir un auteur")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Votre auteur doit être un texte."
-     * )
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 255,
-     *      minMessage = "Votre nom doit avoir au minimum {{ limit }} caractères,
-     *      maxMessage = "Votre nom doit avoir au maximum {{ limit }} caractères"
-     * )
      */
     private $author;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Merci de mettre un contenu")
-     * @Assert\Type(
-     *     type="string",
-     *     message="Votre contenu doit être un texte."
-     * )
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 4294967295,
-     *      minMessage = "Votre nom doit avoir au minimum {{ limit }} caractères,
-     *      maxMessage = "Votre nom doit avoir au maximum {{ limit }} caractères"
-     * )
-     *
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de remplir une image")
-     * @Assert\Length(
-     *      min = 10,
-     *      max = 255,
-     *      minMessage = "Votre URL doit avoir au minimum {{ limit }} caractères,
-     *      maxMessage = "Votre URL doit avoir au maximum {{ limit }} caractères"
-     * )
-     * @Assert\Url(message="Merci de bien mettre une URL", protocols={"http", "https"})
      */
     private $image;
 
