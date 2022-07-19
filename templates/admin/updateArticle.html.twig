@@ -28,10 +28,14 @@
             {{ form_widget(form.content, {'attr': {'class' : 'form-control'}}) }}
             {{ form_errors(form.content) }}
         </div>
-        <div>
+        <div class="form-group">
             {% if article.image %}
                 <img src="{{asset('uploads/images/' ~ article.image) }}" alt="{{ article.title }}">
+                <br>
             {% endif %}
+            {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.image, {'attr': {'class' : 'form-control'}}) }}
+            {{ form_errors(form.image) }}
         </div>
         <div class="form-check">
             {{ form_label(form.category, 'Catégorie', {'label_attr': {'class': 'form-check-label'}}) }}
