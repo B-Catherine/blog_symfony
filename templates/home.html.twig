@@ -1,25 +1,18 @@
-{% extends 'base.html.twig'%}
 
-{% block title %}
-    <title>Bienvenue sur notre blog</title>
-{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Bienvenue</h1>
+    <section class="articles">
+        {% for article in articles %}
 
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+            {% if article.isPublished %}
+                <article class="box-article article">
+                    <a href="{{ path('Article', {'id': article.id }) }}">
+                        <h1>{{ article.title }}</h1>
+                    </a>
+                </article>
+            {% endif %}
 
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
-
-        <input type="hidden" name="_target_path" value="/account"/> #}
-
-        <button type="submit">login</button>
-    </form>
+        {% endfor %}
+    </section>
 {% endblock %}
