@@ -16,25 +16,16 @@
 <header>
 
     <nav>
-        <form method="GET" action="{{ path('adminSearchArticles') }}">
-            <input type="text" name="search">
-            <input type="submit">
-        </form>
+        <p>Bonjour {{ app.user.email }}</p>
         <ul>
             <li>
                 <a href="{{ path('home') }}">Accueil</a>
             </li>
             <li id="center">
-                <a href="{{ path('Articles') }}">Articles</a>
+                <a href="{{ path('adminArticles') }}">Articles</a>
             </li>
             <li id="center">
-                <a href="{{ path('Categories') }}">Catégories</a>
-            </li>
-            <li id="center">
-                <a href="{{ path('app_login') }}">Connexion</a>
-            </li>
-            <li id="center">
-                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                <a href="{{ path('adminCategories') }}">Catégories</a>
             </li>
         </ul>
     </nav>

@@ -14,16 +14,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AdminArticleController extends AbstractController
 {
-    #[Route('/', name: "home")]
-
-    public function home(Request $request, ArticleRepository $repository){
-
-        return $this->render("home.html.twig", [
-            'articles' => $repository->findBy([], [
-                'id' => 'DESC'
-            ], 3)
-        ]);
-    }
 
     #[Route('/admin/articles', name:"adminArticles")]
 

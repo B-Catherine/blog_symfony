@@ -6,22 +6,20 @@
 
 {% block main %}
     <h1>Bienvenue</h1>
-    <section>
-        <form action="{{ path('home') }}" method="get">
-            <label for="age">Quel est votre age ?</label>
-            <input type="text" name="age">
-            <button>Valider</button>
-        </form>
-    </section>
-    <section>
-        <div  id="articles">
-            {% for article in articles | filter(article => article.isPublished) | slice(0,3) %}
-                {% include 'admin/_article.html.twig' %}
-            {% endfor %}
-        </div>
-    </section>
-{% endblock %}
 
-{% block footer %}
-    <p>Bienvenue sur notre blog</p>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('app_login') }}" method="post">
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password"/>
+
+        <input type="hidden" name="_target_path" value="/account"/> #}
+
+        <button type="submit">login</button>
+    </form>
 {% endblock %}
