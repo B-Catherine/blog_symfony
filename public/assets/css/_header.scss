@@ -1,0 +1,28 @@
+*, *::before, *::after {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+nav {
+  background-color: $bandeau;
+  height: 50px;
+  position: relative;
+  ul {
+    list-style: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    li#center {
+      margin: 0 150px;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $link;
+  font-weight: bold;
+}

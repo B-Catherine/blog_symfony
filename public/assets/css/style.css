@@ -4,17 +4,12 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #999999;
-}
-
 nav {
   background-color: #0e33e2;
   height: 50px;
   position: relative;
 }
-
-nav > ul {
+nav ul {
   list-style: none;
   position: absolute;
   top: 50%;
@@ -22,15 +17,18 @@ nav > ul {
   transform: translate(-50%, -50%);
   display: flex;
 }
-
-ul > li#center {
+nav ul li#center {
   margin: 0 150px;
 }
 
 a {
   text-decoration: none;
-  color: yellow;
+  color: #cec623;
   font-weight: bold;
+}
+
+body {
+  background-color: #999999;
 }
 
 main {
@@ -62,6 +60,10 @@ div#article {
 
 form {
   width: 70vw;
+}
+
+.msg, p.success, p.error {
+  background-color: #999999;
 }
 
 p.error {
