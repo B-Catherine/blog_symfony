@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig'%}
+
+{% block title %}
+    <title>Modification d'un admin</title>
+{% endblock %}
+
+{% block main %}
+    <h1>Modification d'un admin</h1>
+    <section>
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.email, 'E-mail', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.email, {'attr': {'class' : 'form-control'}}) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div class="form-check">
+            {{ form_label(form.password, 'Password', {'label_attr': {'class': 'form-check-label'}}) }}
+            {{ form_widget(form.password, {'attr': {'class' : 'form-check-control'}}) }}
+            {{ form_errors(form.password) }}
+        </div>
+        <br><br>
+        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+        {{ form_end(form) }}
+    </section>
+{% endblock %}
+
