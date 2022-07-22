@@ -2,6 +2,15 @@ body {
   background-color: $bg;
 }
 
+a#night_btn {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 20%;
+  padding: 10px 30px;
+  white-space: nowrap;
+}
+
 main {
   text-align: center;
 }
@@ -45,4 +54,14 @@ p.error {
 p.success {
   @extend .msg;
   color: $msg_success;
+}
+
+.night_mode {
+  background-color: black;
+  color: white;
+  a {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+  }
 }

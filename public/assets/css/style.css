@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -9,7 +10,8 @@ nav {
   height: 50px;
   position: relative;
 }
-nav ul {
+
+nav.menu-desktop ul {
   list-style: none;
   position: absolute;
   top: 50%;
@@ -17,8 +19,12 @@ nav ul {
   transform: translate(-50%, -50%);
   display: flex;
 }
-nav ul li#center {
-  margin: 0 150px;
+nav.menu-desktop ul li#center {
+  margin: 0 80px;
+}
+
+nav.menu-iphone {
+  display: none;
 }
 
 a {
@@ -29,6 +35,15 @@ a {
 
 body {
   background-color: #999999;
+}
+
+a#night_btn {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 20%;
+  padding: 10px 30px;
+  white-space: nowrap;
 }
 
 main {
@@ -74,6 +89,69 @@ p.success {
   color: #2dde12;
 }
 
+.night_mode {
+  background-color: black;
+  color: white;
+}
+.night_mode a {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+@media screen and (max-width: 640px) {
+  nav.menu-desktop {
+    display: none;
+  }
+  nav.menu-iphone {
+    display: inline;
+  }
+  ul, li {
+    display: block !important;
+  }
+  li {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 12px;
+    border-bottom: 1px solid #777;
+    background: #111;
+  }
+  #menu-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    background: #fff;
+    color: #000;
+    line-height: 50px;
+    text-align: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+  #menu-btn::after {
+    content: "×";
+  }
+  #menu-btn.close {
+    color: #fff;
+    background: #000;
+  }
+  #menu-btn.close::after {
+    content: "≡";
+  }
+  #nav-menu {
+    transition: transform 0.5s;
+    position: absolute;
+    width: 100%;
+    max-width: 480px;
+    transform: translateY(-300px);
+  }
+  #nav-menu.show-menu {
+    transform: translateY(51px);
+  }
+}
 footer {
   background-color: #0e33e2;
   height: 50px;

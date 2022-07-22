@@ -8,6 +8,9 @@ nav {
   background-color: $bandeau;
   height: 50px;
   position: relative;
+}
+
+nav.menu-desktop {
   ul {
     list-style: none;
     position: absolute;
@@ -16,9 +19,13 @@ nav {
     transform: translate(-50%, -50%);
     display: flex;
     li#center {
-      margin: 0 150px;
+      margin: 0 80px;
     }
   }
+}
+
+nav.menu-iphone {
+  display: none;
 }
 
 a {

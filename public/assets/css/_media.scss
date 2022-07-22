@@ -1,0 +1,60 @@
+@media screen and (max-width: 640px) {
+  nav.menu-desktop {
+    display: none;
+  }
+
+  nav.menu-iphone {
+    display: inline;
+  }
+
+  ul,li{
+    display:block !important;
+  }
+  li{
+    height:50px;
+    line-height:50px;
+    padding:0 12px;
+    border-bottom:1px solid #777;
+    background:#111;
+  }
+
+  #menu-btn{
+    position:absolute;
+    top:0;
+    right:0;
+    width:50px;
+    height:50px;
+    overflow:hidden;
+    background:#fff;
+    color:#000;
+    line-height:50px;
+    text-align:center;
+    font-size:40px;
+    cursor:pointer;
+    transition:all .5s;
+  }
+
+
+  #menu-btn::after{
+    content:'×';
+  }
+  #menu-btn.close{
+    color:#fff;
+    background:#000;
+  }
+  #menu-btn.close::after{
+    content:'≡';
+  }
+
+  #nav-menu{
+    transition:transform .5s;
+    position:absolute;
+    width:100%;
+    max-width:480px;
+    transform:translateY(-300px);
+
+  }
+  #nav-menu.show-menu{
+    transform:translateY(51px);
+  }
+}
